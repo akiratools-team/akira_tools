@@ -582,17 +582,19 @@ export default function ZipExtractorPage() {
               <p className="mt-0.5 text-sm text-gray-500">{panelDescription}</p>
             </div>
 
-            <div className="border-b border-gray-100 px-5 py-4">
-              <label className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600/40 focus-within:ring-offset-2">
-                Select File to Test
-                <input
-                  type="file"
-                  accept=".zip,.rar,.jpg,.jpeg,.png,.webp,.gif,.mp4,.webm,.pdf"
-                  onChange={handleFileUpload}
-                  className="sr-only"
-                />
-              </label>
-            </div>
+            {!fileRoute && (
+              <div className="border-b border-gray-100 px-5 py-4">
+                <label className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600/40 focus-within:ring-offset-2">
+                  Select File to Test
+                  <input
+                    type="file"
+                    accept=".zip,.rar,.jpg,.jpeg,.png,.webp,.gif,.mp4,.webm,.pdf"
+                    onChange={handleFileUpload}
+                    className="sr-only"
+                  />
+                </label>
+              </div>
+            )}
 
             {renderLeftContent()}
           </div>
