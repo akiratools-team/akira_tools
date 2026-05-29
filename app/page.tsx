@@ -84,6 +84,7 @@ export default function ZipExtractorPage() {
   const [selectedFiles, setSelectedFiles] = useState<Set<string>>(new Set());
   const [zipInstance, setZipInstance] = useState<JSZip | null>(null);
   const [fileRoute, setFileRoute] = useState<FileRoute | null>(null);
+  const [inputUrl, setInputUrl] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [currentFileUrl, setCurrentFileUrl] = useState<string | null>(null);
   const [fileExtension, setFileExtension] = useState("");
@@ -583,9 +584,43 @@ export default function ZipExtractorPage() {
             </div>
 
             {!fileRoute && (
-              <div className="border-b border-gray-100 px-5 py-4">
-                <label className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600/40 focus-within:ring-offset-2">
-                  Select File to Test
+              <div className="flex flex-col gap-5 border-b border-gray-100 px-5 py-6">
+                
+                {/* 1. Ô nhập link và nút tải */}
+                <div className="flex w-full items-center gap-3">
+                  <input
+                    type="text"
+                    placeholder="Dán đường link file ZIP/RAR vào đây..."
+                    value={inputUrl}
+                    onChange={(e) => setInputUrl(e.target.value)}
+                    className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (inputUrl.trim()) {
+                        const url = new URL(window.location.href);
+                        url.searchParams.set("fileurl", inputUrl.trim());
+                        window.history.pushState({}, "", url.toString());
+                        loadFromSource(inputUrl.trim());
+                      }
+                    }}
+                    className="whitespace-nowrap rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
+                    Tải & Xem trước
+                  </button>
+                </div>
+
+                {/* 2. Dòng chữ "Hoặc" phân cách */}
+                <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
+                  <span className="h-px flex-1 bg-gray-200"></span>
+                  Hoặc
+                  <span className="h-px flex-1 bg-gray-200"></span>
+                </div>
+
+                {/* 3. Nút Upload gốc */}
+                <label className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-slate-100 px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-slate-400 focus-within:ring-offset-2">
+                  Tải file từ máy tính (Select File)
                   <input
                     type="file"
                     accept=".zip,.rar,.jpg,.jpeg,.png,.webp,.gif,.mp4,.webm,.pdf"
