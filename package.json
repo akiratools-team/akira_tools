@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "node scripts/copy-libarchive.mjs"
   },
   "dependencies": {
+    "fflate": "^0.8.3",
     "jszip": "^3.10.1",
     "libarchive.js": "^2.0.2",
     "lucide-react": "^1.16.0",
