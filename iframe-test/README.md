@@ -63,3 +63,12 @@ observations. Unloading blocks report export until another case is loaded.
 demo defaults and untested result normalization. `node --check app.js` checks
 syntax. These do not establish actual browser/frame/fullscreen acceptance.
 No localhost/file parent or alternate browser is used for cross-site acceptance.
+# Free-owner cloud-share guard
+
+For an actual Free-owner share, choose **Free-owner · request hidden branding**
+and enter its public UUID URL on the fixed Preview origin. The host requests
+dark theme, hidden controls and hidden branding. The viewer must apply the
+owner's server-side entitlement and retain Free defaults. A real Free plan
+must be independently verified; selecting this case does not establish it.
+No private model IDs, model bytes or account details are added to source.
+

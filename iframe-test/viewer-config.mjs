@@ -6,7 +6,7 @@ export const CHECKS = {
   fullscreen: 'Parent-page fullscreen enters and exits', anonymous: 'Works without application sign-in',
 };
 export function buildFrameUrl(value, variant) {
-  if (!['standard', 'pro-custom', 'demo'].includes(variant)) throw new Error('Choose a supported appearance request.');
+  if (!['standard', 'pro-custom', 'free-guard', 'demo'].includes(variant)) throw new Error('Choose a supported appearance request.');
   const url = new URL(variant === 'demo' ? `${PREVIEW_ORIGIN}/v/demo-glb` : value.trim());
   if (url.origin !== PREVIEW_ORIGIN || url.username || url.password ||
     !/^\/v\/(?:[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}|demo-[a-z0-9-]+)$/i.test(url.pathname)) {
@@ -16,7 +16,7 @@ export function buildFrameUrl(value, variant) {
   url.searchParams.set('embed', 'true');
   if (variant !== 'standard') {
     url.searchParams.set('theme', 'dark'); url.searchParams.set('controls', 'hide');
-    url.searchParams.set('branding', variant === 'demo' ? 'hide' : 'show');
+    url.searchParams.set('branding', variant === 'pro-custom' ? 'show' : 'hide');
   }
   return url.toString();
 }

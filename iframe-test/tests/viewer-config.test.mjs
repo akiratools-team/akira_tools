@@ -15,6 +15,23 @@ test('demo is fixed and deliberately requests options the demo should ignore', (
   const url = new URL(buildFrameUrl('ignored', 'demo'));
   assert.equal(url.pathname, '/v/demo-glb'); assert.equal(url.searchParams.get('branding'), 'hide');
 });
+
+test('Free guard uses the supplied cloud-share UUID and requests all Pro-only appearance options', () => {
+  const share = `${PREVIEW_ORIGIN}/v/11111111-1111-4111-8111-111111111111`;
+  const url = new URL(buildFrameUrl(`${share}?secret=discarded#discarded`, 'free-guard'));
+  assert.equal(url.pathname, '/v/11111111-1111-4111-8111-111111111111');
+  assert.equal(url.searchParams.get('embed'), 'true');
+  assert.equal(url.searchParams.get('theme'), 'dark');
+  assert.equal(url.searchParams.get('controls'), 'hide');
+  assert.equal(url.searchParams.get('branding'), 'hide');
+  assert.equal(url.searchParams.has('secret'), false);
+  assert.equal(url.hash, '');
+});
+
+test('Free guard retains the fixed-origin and no-credentials restrictions', () => {
+  assert.throws(() => buildFrameUrl('https://other.test/v/demo-glb', 'free-guard'));
+  assert.throws(() => buildFrameUrl(`https://user:pass@${new URL(PREVIEW_ORIGIN).hostname}/v/demo-glb`, 'free-guard'));
+});
 test('other origins, credentials, unrelated paths and invalid variants are rejected', () => {
   for (const value of ['https://other.test/v/demo-glb', `http://${new URL(PREVIEW_ORIGIN).hostname}/v/demo-glb`,
     `${PREVIEW_ORIGIN}/dashboard`, `${PREVIEW_ORIGIN}/v/../login`, `https://user:pass@${new URL(PREVIEW_ORIGIN).hostname}/v/demo-glb`, 'javascript:alert(1)']) {
