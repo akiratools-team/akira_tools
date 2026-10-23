@@ -3,7 +3,25 @@
 An isolated buildless HTML/CSS/JS page. It does not run the repository's archive
 tools, Next.js application, package installation or postinstall scripts.
 
-## Proposed Vercel project
+## Selected hosting: Cloudflare Pages Direct Upload
+
+The owner selected free static Cloudflare Pages after the Vercel team was
+confirmed as Hobby. No Vercel project, deployment, trial or paid plan was created.
+
+- Separate Pages project: `3dviewer-iframe-test` if available.
+- Upload exactly `index.html`, `styles.css`, `app.js`, `viewer-config.mjs`, `_headers`
+  at the archive root. Exclude source tests, README and Vercel configuration.
+- No build, Functions, environment variables, database or R2 binding.
+- `_headers` applies the same CSP/noindex/nosniff/referrer policy on Pages.
+- Repository source stays on `codex/iframe-acceptance-host`; Direct Upload does
+  not automatically build or sync that branch. Deployments must be explicitly
+  uploaded again after a source change. Keep a source SHA/archive hash record.
+- Pages Direct Upload cannot be converted into Git integration for the same
+  project; a new project would be needed if automatic builds are wanted later.
+- This is a newly authorized public sample-only external test website, not a
+  retry of the previously blocked local file page.
+
+## Original Vercel proposal (not deployed)
 
 - Repository: `akiratools-team/akira_tools`.
 - Branch: `codex/iframe-acceptance-host` (keep `master` unchanged).
