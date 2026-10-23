@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  <title>3DViewerConvert · Embed acceptance</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="site-header"><a href="#main">Akira / Test workspace</a><span>PR16 · Manual acceptance</span></header>
+  <main id="main">
+    <section class="intro"><p class="eyebrow">External host</p><h1>A 3D viewer, inside another website.</h1><p>Check the real embedded experience. The viewer loads only when you choose Open viewer.</p></section>
+    <div class="workspace">
+      <aside aria-label="Test setup">
+        <h2>Set up a case</h2>
+        <form id="setup">
+          <label for="variant">Appearance request</label>
+          <select id="variant"><option value="standard">Standard share</option><option value="pro-custom">Dark · hide controls · show branding</option><option value="demo">Bundled demo · default branding</option></select>
+          <label for="share-link">Public model link</label>
+          <input id="share-link" type="url" spellcheck="false" required aria-describedby="link-help">
+          <p id="link-help" class="hint">Only this fixed PR16 Preview host is accepted. Use public test models.</p>
+          <p class="hint">Appearance is authorized by the model owner's plan. The demo is not proof of a real Free-owner share.</p>
+          <button type="submit" class="primary">Open viewer</button><button type="button" id="unload">Unload viewer</button>
+        </form>
+        <p id="error" role="alert" hidden></p>
+        <dl class="origins"><dt>Parent origin</dt><dd id="parent-origin"></dd><dt>Viewer origin</dt><dd id="viewer-origin"></dd></dl>
+      </aside>
+      <section class="preview" aria-labelledby="preview-heading">
+        <div class="preview-header"><h2 id="preview-heading">Embedded viewport</h2><div class="width-controls" role="group" aria-label="Frame width"><button type="button" data-width="wide" aria-pressed="true">Wide</button><button type="button" data-width="narrow" aria-pressed="false">390 px</button></div></div>
+        <div id="frame-shell" class="frame-shell"><p id="empty">Choose a case, then open the viewer.<br><span>No model has been requested yet.</span></p><button type="button" id="exit-fullscreen">Exit fullscreen</button></div>
+        <div class="preview-footer"><p id="frame-state" role="status" aria-live="polite">Not loaded</p><button type="button" id="fullscreen" disabled>Fullscreen frame</button></div>
+        <p class="hint">390 px tests a narrow layout, not a physical phone. Fullscreen here is requested by this parent page; it does not prove the viewer has its own fullscreen control.</p>
+        <p class="hint">A frame load event does not prove a model rendered. If Vercel sign-in or protection appears, record the blocker.</p>
+      </section>
+    </div>
+    <section class="observations" aria-labelledby="observations-heading"><div><p class="eyebrow">Your observations</p><h2 id="observations-heading">Inspect before marking a result.</h2><p>The report stays on this device. Nothing is submitted to a database.</p></div><div id="checks"></div></section>
+    <div class="report-bar"><p>Manual results · no automatic pass claims</p><button type="button" id="download" class="primary">Download JSON report</button></div>
+    <section class="page-context"><h2>Check the surrounding page too.</h2><p>Scroll this page, use these controls and resize the frame. The parent page should remain usable while you rotate or zoom the model.</p><a href="#main">Back to test setup</a></section>
+    <noscript>JavaScript is required to open the test frame. No model loads without it.</noscript>
+  </main>
+  <footer>Acceptance host only. Public sample models. No application credentials.</footer>
+</body>
+</html>
